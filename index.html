@@ -1,0 +1,488 @@
+<!DOCTYPE html><html lang="hi-IN"><head>
+    <meta name="google-adsense-account" content="ca-pub-6791318178265120">
+    <script async="" src="js/adsbygoogle.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Croper – Free Aadhaar, PAN, Voter ID &amp; ABHA Card Crop and Print Tool (4x6 &amp; A4)</title>
+<meta name="description" content="Smart Croper is a free online tool to crop and print Aadhaar, PAN, Voter ID, Ayushman, ABHA, APAAR, UDID, e-Shram and Kisan cards on 4x6 photo paper or A4 sheet. Upload your PDF or photo and download a print-ready card layout instantly — 100% in your browser, nothing is uploaded anywhere.">
+<meta name="keywords" content="aadhar card crop tool, pan card 4x6 print, voter id a4 print, ayushman card print size, abha card print, apaar card print, udid card print, e-shram card print, kisan card print, id card crop online free, e-aadhaar pdf to card, csc vle id card tool, digital seva id print">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://smartcroper.com/">
+<meta name="author" content="Smart Croper">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Smart Croper – Aadhaar, PAN, Voter ID &amp; ID Card Crop and Print Tool">
+<meta property="og:description" content="Crop and arrange any Indian ID card for perfect 4x6 or A4 printing — free, instant, fully in-browser. No sign-up, no file upload to any server.">
+<meta property="og:url" content="https://smartcroper.com/">
+<meta property="og:locale" content="en_IN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Smart Croper – ID Card Crop &amp; Print Tool">
+<meta name="twitter:description" content="Free online tool to crop and print Aadhaar, PAN, Voter ID &amp; Ayushman Card on 4x6 or A4 paper.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "SmartCroper",
+  "url": "https://smartcroper.com/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (Web Browser)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "description": "Free browser-based tool to crop and arrange Aadhaar Card, PAN Card, Voter ID and Ayushman Card (and other IDs) for print-ready 4x6 photo paper or A4 sheet output."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this ID card crop and print tool free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Aadhaar, PAN, Voter ID, Ayushman Card and any other ID card tool on this site is completely free with no sign-up." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my Aadhaar or PAN PDF uploaded to a server?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The PDF or image is opened and rendered entirely inside your own browser using PDF.js and canvas processing. Nothing is sent to or stored on any server." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between 4x6 and A4 output?",
+      "acceptedAnswer": { "@type": "Answer", "text": "4x6 photo paper output is a 1200x1800 pixel portrait layout meant for PVC card printing at photo studios. A4 output is a 3508x2480 pixel landscape layout meant for printing multiple cards on a standard office printer." }
+    },
+    {
+      "@type": "Question",
+      "name": "My e-Aadhaar PDF is password protected. Can I still use this tool?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, enter your PDF's password (for e-Aadhaar this is usually the first four letters of your name in capitals plus your birth year) in the password field before processing." }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<script src="js/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+</script>
+
+<style>
+
+:root{
+  --ink:#12213F;
+  --ink-soft:#3A4A6B;
+  --paper:#E9EDE9;
+  --paper-deep:#DEE4DD;
+  --card:#FFFFFF;
+  --marigold:#D98A2B;
+  --marigold-deep:#B96F19;
+  --seal:#1F6F54;
+  --stamp-red:#A63A3A;
+  --line:#C9CFC7;
+  --radius:14px;
+  --shadow: 0 6px 20px rgba(18,33,63,0.09);
+  --font-display: "Fraunces", serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.55;
+}
+img{max-width:100%;display:block;}
+a{color:var(--seal);}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px;}
+
+/* Header */
+header.site{
+  background:var(--ink);
+  color:#fff;
+  padding:16px 0;
+  position:sticky;top:0;z-index:40;
+  border-bottom:3px solid var(--marigold);
+}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:1.3rem;letter-spacing:0.2px;}
+.brand .mark{width:34px;height:34px;border-radius:8px;background:var(--marigold);display:flex;align-items:center;justify-content:center;color:var(--ink);font-family:var(--font-mono);font-weight:700;font-size:0.85rem;}
+nav.top{display:flex;gap:22px;font-size:0.92rem;}
+nav.top a{color:#E9EDE9;text-decoration:none;opacity:0.88;}
+nav.top a:hover{opacity:1;text-decoration:underline;}
+
+/* Hero */
+.hero{padding:56px 0 44px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{
+  content:"";position:absolute; inset:0;
+  background-image:linear-gradient(var(--line) 1px, transparent 1px),linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:34px 34px;opacity:0.25;pointer-events:none;
+}
+.hero .eyebrow{
+  font-family:var(--font-mono);font-size:0.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--seal);
+  background:#fff;border:1px solid var(--line);display:inline-block;padding:5px 14px;border-radius:100px;margin-bottom:18px;position:relative;
+}
+h1{font-family:var(--font-display);font-size:clamp(2rem, 4.4vw, 3.1rem);line-height:1.12;margin:0 0 16px;font-weight:700;position:relative;}
+h1 span{color:var(--marigold-deep);}
+.hero p.sub{max-width:660px;margin:0 auto;color:var(--ink-soft);font-size:1.08rem;position:relative;}
+.trust-row{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:26px;position:relative;font-family:var(--font-mono);font-size:0.82rem;color:var(--ink-soft);}
+.trust-row span{display:flex;align-items:center;gap:7px;}
+.trust-row .dot{width:7px;height:7px;border-radius:50%;background:var(--seal);}
+
+/* App Section */
+.app-section{padding:20px 0 60px;}
+.app-grid{display:grid;grid-template-columns:220px 1fr 220px;gap:22px;align-items:start;}
+.rail{display:flex;flex-direction:column;gap:14px;position:sticky;top:90px;}
+.rail-title{font-family:var(--font-mono);font-size:0.72rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px;padding-left:4px;}
+.tool-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px;
+  display:flex;align-items:center;gap:12px;cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;text-align:left;width:100%;
+}
+.tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--marigold);}
+.tool-card.active{border-color:var(--seal);box-shadow:0 0 0 3px rgba(31,111,84,0.15), var(--shadow);}
+.tool-icon{width:44px;height:34px;border-radius:6px;flex-shrink:0;position:relative;background:#fff;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;}
+.tool-icon::before{content:"";position:absolute;top:0;left:0;right:0;height:8px;border-radius:5px 5px 0 0;background:var(--stripe,var(--marigold));}
+.tool-icon .code{font-family:var(--font-mono);font-size:0.52rem;font-weight:700;color:var(--ink);margin-top:4px;letter-spacing:0.3px;}
+.tool-meta strong{display:block;font-size:0.88rem;line-height:1.2;}
+.tool-meta small{color:var(--ink-soft);font-size:0.72rem;font-family:var(--font-mono);}
+
+/* Center stage */
+.stage{background:var(--card);border:1px solid var(--line);border-radius:20px;min-height:520px;padding:30px;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.stage-seal{position:absolute;right:-60px;bottom:-60px;width:260px;height:260px;border:14px solid var(--paper-deep);border-radius:50%;opacity:0.6;pointer-events:none;}
+.stage-empty{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--ink-soft);min-height:460px;}
+.stage-empty .big-icon{width:88px;height:70px;border-radius:10px;background:#fff;border:2px dashed var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-family:var(--font-mono);font-size:1.6rem;color:var(--line);}
+.stage-empty h2{font-family:var(--font-display);color:var(--ink);margin:0 0 8px;font-size:1.4rem;}
+
+.stage-active{position:relative;z-index:1;}
+.field-group{margin-bottom:16px;}
+.field-group label{display:block;font-size:0.72rem;font-weight:600;color:var(--ink-soft);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--font-mono);}
+.field-group input[type="file"],.field-group input[type="text"]{
+  width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--font-body);font-size:0.9rem;color:var(--ink);background:var(--paper);outline:none;transition:border-color .15s ease;
+}
+.field-group input:focus{border-color:var(--marigold);}
+
+.paper-toggle{display:flex;gap:10px;margin-bottom:20px;}
+.paper-btn{flex:1;padding:12px 8px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);cursor:pointer;text-align:center;transition:all .18s ease;font-family:var(--font-body);}
+.paper-btn .pb-title{font-size:0.85rem;font-weight:700;color:var(--ink);}
+.paper-btn .pb-sub{font-size:0.68rem;color:var(--ink-soft);margin-top:2px;font-family:var(--font-mono);}
+.paper-btn:hover{border-color:var(--marigold);}
+.paper-btn.active{border-color:var(--seal);background:#EAF3EF;box-shadow:0 0 0 2px rgba(31,111,84,0.15);}
+
+button.btn{font-family:var(--font-body);font-weight:600;font-size:0.9rem;padding:11px 20px;border-radius:9px;border:none;cursor:pointer;transition:transform .12s ease, background .15s ease;}
+.btn.primary{background:var(--marigold);color:var(--ink);width:100%;}
+.btn.primary:hover{background:var(--marigold-deep);transform:translateY(-1px);}
+.btn.primary:disabled{background:#EFD9B4;cursor:not-allowed;transform:none;}
+.btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink);}
+.btn.ghost:hover{border-color:var(--ink);}
+
+.status-box{margin-top:14px;padding:12px 16px;border-radius:10px;font-size:0.85rem;font-weight:600;text-align:center;display:none;}
+.status-box.loading{background:#EAF0FB;color:var(--ink-soft);display:block;}
+.status-box.success{background:#E6F4EA;color:var(--seal);display:block;}
+.status-box.error{background:#FBE9E7;color:var(--stamp-red);display:block;}
+
+.progress-wrap{margin-top:10px;background:var(--paper);border-radius:8px;height:6px;overflow:hidden;display:none;}
+.progress-bar{height:100%;background:var(--marigold);border-radius:8px;width:0%;transition:width .3s ease;}
+
+.download-section{display:none;margin-top:18px;gap:10px;flex-direction:column;}
+.download-section.visible{display:flex;}
+.dl-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:12px;font-family:var(--font-body);font-size:0.88rem;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:opacity .15s ease, transform .12s ease;}
+.dl-btn:active{transform:scale(0.98);}
+.dl-4x6{background:var(--ink);color:#fff;}
+.dl-a4{background:var(--seal);color:#fff;}
+.dl-btn:hover{opacity:0.9;}
+
+/* Specs table section */
+.section{padding:56px 0;}
+.section h2{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);margin-bottom:8px;}
+.section p.lead{color:var(--ink-soft);max-width:680px;margin:0 0 30px;}
+table.specs{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);}
+table.specs th,table.specs td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:0.9rem;}
+table.specs th{background:var(--ink);color:#fff;font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.6px;font-weight:500;}
+table.specs tr:last-child td{border-bottom:none;}
+table.specs td.mono{font-family:var(--font-mono);color:var(--ink-soft);}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;}
+.step .num{font-family:var(--font-mono);color:var(--marigold-deep);font-size:0.78rem;letter-spacing:1px;margin-bottom:8px;}
+.step h3{margin:0 0 8px;font-size:1.05rem;font-family:var(--font-display);}
+.step p{margin:0;color:var(--ink-soft);font-size:0.9rem;}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--line);padding:16px 0;}
+.faq-item summary{cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{content:"+";font-family:var(--font-mono);color:var(--marigold-deep);font-size:1.3rem;}
+.faq-item[open] summary::after{content:"\2013";}
+.faq-item p{color:var(--ink-soft);margin:10px 0 0;font-size:0.93rem;}
+
+/* Footer */
+footer.site{background:var(--ink);color:#DDE3DD;padding:44px 0 26px;font-size:0.88rem;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;}
+.footer-grid h4{color:#fff;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.8px;font-family:var(--font-mono);margin:0 0 12px;}
+.footer-grid a{display:block;color:#C9D0C9;text-decoration:none;margin-bottom:8px;}
+.footer-grid a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid #263457;margin-top:30px;padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#9AA6C4;font-size:0.8rem;}
+
+/* Responsive */
+@media (max-width:980px){
+  .app-grid{grid-template-columns:1fr;}
+  .rail{flex-direction:row;flex-wrap:wrap;position:static;}
+  .tool-card{flex:1 1 45%;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){
+  nav.top{display:none;}
+  .tool-card{flex:1 1 100%;}
+  .footer-grid{grid-template-columns:1fr;}
+  .paper-toggle{flex-direction:column;}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+:focus-visible{outline:2.5px solid var(--marigold-deep);outline-offset:2px;}
+
+/* Important tools ribbon */
+.tools-ribbon{background:var(--card);border-bottom:1px solid var(--line);padding:12px 0;}
+.ribbon-scroll{display:flex;gap:12px;overflow-x:auto;padding:4px 2px;scrollbar-width:thin;}
+.ribbon-scroll::-webkit-scrollbar{height:6px;}
+.ribbon-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:10px;}
+.ribbon-item{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-family:var(--font-body);transition:transform .15s ease, border-color .15s ease, background .15s ease;min-width:88px;}
+.ribbon-item:hover{border-color:var(--marigold);background:#FFF6E7;transform:translateY(-2px);}
+.ribbon-item:focus-visible{outline:2.5px solid var(--marigold-deep);outline-offset:2px;}
+.ribbon-icon{font-size:1.3rem;line-height:1;}
+.ribbon-label{font-size:0.72rem;font-weight:600;color:var(--ink);text-align:center;line-height:1.2;white-space:nowrap;}
+@media (max-width:560px){
+  .ribbon-item{min-width:76px;padding:8px 10px;}
+  .ribbon-label{font-size:0.68rem;}
+}
+/* Mobile menu */
+.menu-btn{display:none;background:none;border:1px solid #3b4d86;color:#fff;border-radius:8px;padding:8px 12px;font:inherit;font-size:.92rem;cursor:pointer}
+@media (max-width:560px){
+  .menu-btn{display:block}
+  header.site nav.top.open{
+    display:flex;flex-direction:column;gap:0;
+    position:absolute;left:0;right:0;top:100%;
+    background:var(--ink);border-bottom:3px solid var(--marigold);
+    padding:6px 20px 12px;
+  }
+  header.site nav.top.open a{padding:12px 4px;font-size:1rem;border-bottom:1px solid #263457}
+  header.site nav.top.open a:last-child{border-bottom:0}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand"><span class="mark">SC</span> Smart Croper</div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="topnav">☰ Menu</button>
+    <nav class="top" id="topnav">
+      <a href="#">Home</a>
+      <a href="/all-tools.html">All Tools</a>
+      <a href="#specs">Print Sizes</a>
+      <a href="#how">How it works</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!--
+  IMPORTANT TOOLS RIBBON
+  Each button below is a DEMO placeholder. Replace the data-url value
+  on every .ribbon-item with the real tool link before going live —
+  clicking opens that URL in a small popup window.
+-->
+<section class="tools-ribbon" aria-label="Important tools">
+  <div class="wrap">
+    <div class="ribbon-scroll" id="ribbonScroll">
+      
+      <button class="ribbon-item" data-title="Smart Print Hub" data-url="https://www.smartcroper.com/smart-print">
+        <span class="ribbon-icon">🖶</span><span class="ribbon-label">Smart Print Hub</span>
+      </button>
+      
+      <button class="ribbon-item" data-title="PVC Card Print" data-url="https://smartcroper.com/pvc-card-print.html">
+        <span class="ribbon-icon">💳</span><span class="ribbon-label">PVC Card Print</span>
+      </button>
+      <button class="ribbon-item" data-title="Multiple ID Card Print" data-url="https://smartcroper.com/multiple-id-print.html">
+        <span class="ribbon-icon">📇</span><span class="ribbon-label">Multiple ID Print</span>
+      </button>
+      <button class="ribbon-item" data-title="WhatsApp Document Print Tool" data-url="https://smartcroper.com/whatsapp-document-print.html">
+        <span class="ribbon-icon">🔁</span><span class="ribbon-label">WhatsApp Print</span>
+      </button>
+      
+      <button class="ribbon-item" data-title="Ai Passport Photo Maker" data-url="https://www.smartcroper.com/passport-photo-maker.html">
+        <span class="ribbon-icon">🤵</span><span class="ribbon-label">Passport Photo</span>
+      </button>
+      
+      <button class="ribbon-item" data-title="Farmer ID Card" data-url="https://www.smartcroper.com/farmer-id-card-maker.html">
+        <span class="ribbon-icon">🌾</span><span class="ribbon-label">Farmer ID Card</span>
+      </button>
+      <button class="ribbon-item" data-title="Affidavit Format" data-url="https://smartcroper.com/affidavit-format-generator.html">
+        <span class="ribbon-icon">📰</span><span class="ribbon-label">Affidavit Format</span>
+      </button>
+      <button class="ribbon-item" data-title="Bank Application" data-url="https://smartcroper.com/bank-application-generator.html">
+        <span class="ribbon-icon">🏦</span><span class="ribbon-label">Bank Application</span>
+      </button>
+      <button class="ribbon-item" data-title="Csc Services Rate List" data-url="https://smartcroper.com/csc-services-list.html">
+        <span class="ribbon-icon">📜</span><span class="ribbon-label">Csc Rate List</span>
+      </button>
+      
+      
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">100% Browser-Based · No Upload To Any Server</span>
+    <h1>Welcome to <span>Smart Croper</span></h1>
+    <p class="sub">Pick your document, upload your e-Aadhaar / e-PAN / e-Voter PDF or a plain photo, choose 4x6 photo-paper or A4 sheet, and Ready to Print front-and-back layout.</p>
+    <div class="trust-row">
+      <span><i class="dot"></i>Works on mobile &amp; desktop</span>
+      <span><i class="dot"></i>No sign-up required</span>
+      <span><i class="dot"></i>Files never leave your device</span>
+      <span><i class="dot"></i>Supports password-protected PDFs</span>
+    </div>
+  </div>
+</section>
+
+<section class="app-section" id="tools">
+  <div class="wrap">
+    <div class="app-grid">
+
+      <div class="rail" id="railLeft">
+        <div class="rail-title">Identity Documents</div>
+      <button class="tool-card" type="button" id="card-aadhaar" aria-label="Open Aadhaar Card tool"><span class="tool-icon" style="--stripe:#D98A2B"><span class="code">AAD</span></span><span class="tool-meta"><strong>Aadhaar Card</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-pan" aria-label="Open PAN Card tool"><span class="tool-icon" style="--stripe:#1F6F54"><span class="code">PAN</span></span><span class="tool-meta"><strong>PAN Card</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-voter" aria-label="Open Voter ID (EPIC) tool"><span class="tool-icon" style="--stripe:#A63A3A"><span class="code">EPIC</span></span><span class="tool-meta"><strong>Voter ID (EPIC)</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-ayushman" aria-label="Open Ayushman Card tool"><span class="tool-icon" style="--stripe:#12213F"><span class="code">ABY</span></span><span class="tool-meta"><strong>Ayushman Card</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-abha" aria-label="Open ABHA Card tool"><span class="tool-icon" style="--stripe:#1F6F54"><span class="code">ABHA</span></span><span class="tool-meta"><strong>ABHA Card</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-apaar" aria-label="Open APAAR Card tool"><span class="tool-icon" style="--stripe:#D98A2B"><span class="code">APAR</span></span><span class="tool-meta"><strong>APAAR Card</strong><small>4x6 / A4</small></span></button></div>
+
+      <div class="stage" id="stage">
+        <div class="stage-seal" aria-hidden="true"></div>
+        <div class="stage-empty" id="stageEmpty">
+          <div class="big-icon">?</div>
+          <h2>Select a document to begin</h2>
+          <p>Choose any tool from the left or right — your workspace will appear right here.</p>
+        </div>
+      </div>
+
+      <div class="rail" id="railRight">
+        <div class="rail-title">Identity Documents</div>
+      <button class="tool-card" type="button" id="card-eshram" aria-label="Open e-Shram Card tool"><span class="tool-icon" style="--stripe:#12213F"><span class="code">ESHM</span></span><span class="tool-meta"><strong>e-Shram Card</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-kisan" aria-label="Open Kisan Card tool"><span class="tool-icon" style="--stripe:#D98A2B"><span class="code">KSAN</span></span><span class="tool-meta"><strong>Kisan Card</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-passport" aria-label="Open Passport tool"><span class="tool-icon" style="--stripe:#1F6F54"><span class="code">PPT</span></span><span class="tool-meta"><strong>Passport</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-dl" aria-label="Open Driving Licence tool"><span class="tool-icon" style="--stripe:#A63A3A"><span class="code">DL</span></span><span class="tool-meta"><strong>Driving Licence</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-ration" aria-label="Open Ration Card tool"><span class="tool-icon" style="--stripe:#12213F"><span class="code">RC</span></span><span class="tool-meta"><strong>Ration Card</strong><small>4x6 / A4</small></span></button><button class="tool-card" type="button" id="card-custom" aria-label="Open Any Other ID tool"><span class="tool-icon" style="--stripe:#D98A2B"><span class="code">ID</span></span><span class="tool-meta"><strong>Any Other ID</strong><small>4x6 / A4</small></span></button></div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="specs">
+  <div class="wrap">
+    <h2>Smart Crop Output specifications</h2>
+    <p class="lead">Every document on this site can be exported in either of these two print-ready layouts.</p>
+    <table class="specs">
+      <thead><tr><th>Output</th><th>Pixels</th><th>Orientation</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><strong>4x6 Photo Paper</strong></td><td class="mono">1200 × 1800 px</td><td class="mono">Portrait</td><td>PVC card printing at a photo studio</td></tr>
+        <tr><td><strong>A4 Sheet</strong></td><td class="mono">3508 × 2480 px</td><td class="mono">Landscape</td><td>Printing multiple cards side-by-side on a home/office printer</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <h2>How the crop &amp; print tool works</h2>
+    <p class="lead">Four simple steps, entirely inside your browser.</p>
+    <div class="steps">
+      <div class="step"><div class="num">STEP 1</div><h3>Choose your document</h3><p>Tap the ID card you need — Aadhaar, PAN, Voter ID, Ayushman Card, ABHA, APAAR, UDID, e-Shram, Kisan Card, Passport, DL, Ration Card or any other ID.</p></div>
+      <div class="step"><div class="num">STEP 2</div><h3>Upload your PDF or photo</h3><p>Select your e-document PDF or a scanned image. Enter the PDF password if it's protected.</p></div>
+      <div class="step"><div class="num">STEP 3</div><h3>Pick a paper size</h3><p>Choose 4x6 photo paper, A4 sheet, or both together.</p></div>
+      <div class="step"><div class="num">STEP 4</div><h3>Print instantly</h3><p>Get a correctly cropped, front-and-back print layout, ready to take to the print shop.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <h2>Frequently asked questions</h2>
+    <details class="faq-item" open="">
+      <summary>Is this ID card crop and print tool free?</summary>
+      <p>Yes. Aadhaar, PAN, Voter ID, Ayushman Card, ABHA, APAAR, UDID, e-Shram, Kisan Card and any other ID card tool on this site is completely free with no sign-up.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is my Aadhaar or PAN PDF uploaded to a server?</summary>
+      <p>No. The PDF or image is opened and rendered entirely inside your own browser using PDF.js and canvas processing. Nothing is sent to or stored on any server.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What is the difference between 4x6 and A4 output?</summary>
+      <p>4x6 photo paper output is a 1200x1800 pixel portrait layout meant for PVC card printing. A4 output is a 3508x2480 pixel landscape layout meant for printing multiple cards on a standard office printer.</p>
+    </details>
+    <details class="faq-item">
+      <summary>My e-Aadhaar PDF is password protected. Can I still use this tool?</summary>
+      <p>Yes — enter the PDF's password in the password field before processing. Your password is used only inside your browser to open the file locally.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What if my ID does not match Aadhaar, PAN, Voter ID or Ayushman layouts?</summary>
+      <p>Use the "Any Other ID" option — upload the front side (and optionally the back side separately) as a PDF or photo, and both sides will be arranged neatly for a perfect 4x6/A4 print, no matter which document it is.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Smart Croper</h4>
+        <p style="color:#B7C0DA;max-width:280px;">SmartCroper.com is a free, privacy-first tool to Auto Crop ID cards — Aadhaar, PAN, Voter ID, Ayushman, ABHA, APAAR, UDID, e-Shram, Kisan and more — on 4x6 photo paper or A4 sheets.</p>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <a href="/whatsapp-document-print.html">WhatsApp Image Print</a>
+        <a href="/passport-photo-maker.html">Passport Photo Maker</a>
+        <a href="/pvc-card-print.html">Pvc Card Maker</a>
+        <a href="/csc-services-list.html">Csc Rate List</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <a href="#specs">Print Sizes</a>
+        <a href="#how">How It Works</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> SmartCroper.com. All Rights Reserved.</span>
+      
+    </div>
+  </div>
+</footer>
+
+<script>
+!function(){"use strict";document.addEventListener("contextmenu",function(e){e.preventDefault()}),document.addEventListener("keydown",function(e){var t=e.key;"F12"!==t&&(!e.ctrlKey||!e.shiftKey||"I"!==t&&"J"!==t&&"C"!==t)&&(!e.ctrlKey||"u"!==t&&"U"!==t)||e.preventDefault()}),console.log("%cRuk jao!","font-size:22px;font-weight:bold;color:#A63A3A;"),console.log("%cIs tool ka source code copyright-protected hai. Copy/paste karke reuse na karein.","font-size:13px;color:#3A4A6B;"),document.getElementById("year").textContent=(new Date).getFullYear();var e=[{id:"aadhaar",name:"Aadhaar Card",code:"AAD",side:"left",stripe:"#D98A2B",renderKey:"aadhaar",needsPassword:!0,note:"Upload your e-Aadhaar PDF (or a scanned photo)."},{id:"pan",name:"PAN Card",code:"PAN",side:"left",stripe:"#1F6F54",renderKey:"pan",needsPassword:!0,note:"Upload your e-PAN PDF (NSDL/UTIITSL) or a scanned photo."},{id:"voter",name:"Voter ID (EPIC)",code:"EPIC",side:"left",stripe:"#A63A3A",renderKey:"voter",needsPassword:!0,note:"Upload your e-EPIC PDF or a scanned photo."},{id:"ayushman",name:"Ayushman Card",code:"ABY",side:"left",stripe:"#12213F",renderKey:"ayushman",needsPassword:!1,note:"Upload your Ayushman Card PDF or photo."},{id:"abha",name:"ABHA Card",code:"ABHA",side:"left",stripe:"#1F6F54",renderKey:"custom",needsPassword:!1,note:"Upload your ABHA (Ayushman Bharat Health Account) card PDF or photo."},{id:"apaar",name:"APAAR Card",code:"APAR",side:"left",stripe:"#D98A2B",renderKey:"custom",needsPassword:!1,note:"Upload your APAAR (student ID) card PDF or photo."},{id:"eshram",name:"e-Shram Card",code:"ESHM",side:"right",stripe:"#12213F",renderKey:"custom",needsPassword:!1,note:"Upload your e-Shram card PDF or photo."},{id:"kisan",name:"Kisan Card",code:"KSAN",side:"right",stripe:"#D98A2B",renderKey:"custom",needsPassword:!1,note:"Upload your Kisan (PM-Kisan / KCC) card PDF or photo."},{id:"passport",name:"Passport",code:"PPT",side:"right",stripe:"#1F6F54",renderKey:"custom",needsPassword:!0,note:"Upload a scan or PDF of your passport photo page."},{id:"dl",name:"Driving Licence",code:"DL",side:"right",stripe:"#A63A3A",renderKey:"custom",needsPassword:!0,note:"Upload your DL PDF/photo (front or back)."},{id:"ration",name:"Ration Card",code:"RC",side:"right",stripe:"#12213F",renderKey:"custom",needsPassword:!1,note:"Upload your ration card photo or PDF page."},{id:"custom",name:"Any Other ID",code:"ID",side:"right",stripe:"#D98A2B",renderKey:"custom",needsPassword:!0,dualUpload:!0,note:"Upload the front (and optionally back) side of any ID card as PDF or photo — both sides are arranged neatly for perfect 4x6/A4 printing."}],t=document.getElementById("railLeft"),a=document.getElementById("railRight");e.forEach(function(r){!function(r){var d=document.createElement("button");d.className="tool-card",d.type="button",d.id="card-"+r.id,d.setAttribute("aria-label","Open "+r.name+" tool"),d.innerHTML='<span class="tool-icon" style="--stripe:'+r.stripe+'"><span class="code">'+r.code+'</span></span><span class="tool-meta"><strong>'+r.name+"</strong><small>4x6 / A4</small></span>",d.addEventListener("click",function(){var t;t=r.id,o=e.filter(function(e){return e.id===t})[0],n="4x6",document.querySelectorAll(".tool-card").forEach(function(e){e.classList.remove("active")}),document.getElementById("card-"+t).classList.add("active"),i(o),document.getElementById("stage").scrollIntoView({behavior:"smooth",block:"center"})}),("left"===r.side?t:a).appendChild(d)}(r)});var o=null,n="4x6";function r(e,t){var a=document.getElementById("statusBox");if(a){if(!e)return a.style.display="none",void(a.className="status-box");a.style.display="block",a.className="status-box "+t,a.textContent=e}}function d(e){var t=document.getElementById("progressWrap"),a=document.getElementById("progressBar");t&&a&&(t.style.display="block",a.style.width=Math.min(e,100)+"%")}function i(e){var t,a,o,d=e.dualUpload?'<div class="field-group"><label>Upload Front Side (PDF/JPG/PNG)</label><input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png"></div><div class="field-group"><label>Upload Back Side (optional)</label><input type="file" id="backFileInput" accept=".pdf,.jpg,.jpeg,.png"></div>':'<div class="field-group"><label>Upload PDF or Photo</label><input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png"></div>';t=e.name+" Crop & Print",a=e.note,o=d+(e.needsPassword?'<div class="field-group" id="passwordGroup"><label>PDF Password (if locked)</label><input type="text" id="pdfPassword" placeholder="Enter password, leave blank if not protected"></div>':"")+'<div class="field-group"><label>Output Paper Format</label><div class="paper-toggle"><div class="paper-btn active" data-fmt="4x6"><div class="pb-title">4x6 Photo</div><div class="pb-sub">Portrait · PVC print</div></div><div class="paper-btn" data-fmt="a4"><div class="pb-title">A4 Sheet</div><div class="pb-sub">Landscape · Office print</div></div><div class="paper-btn" data-fmt="both"><div class="pb-title">Both</div><div class="pb-sub">4x6 + A4</div></div></div></div><button class="btn primary" id="submitBtn">Crop & Generate Print</button><div class="status-box" id="statusBox"></div><div class="progress-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div><div class="download-section" id="downloadSection"><a class="dl-btn dl-4x6" id="dl4x6Btn" download>Download 4x6 Print (Portrait)</a><a class="dl-btn dl-a4" id="dlA4Btn" download>Download A4 Print (Landscape)</a><button class="btn ghost" id="resetBtn" type="button">Reset & Generate New Card</button></div>',document.getElementById("stage").innerHTML='<div class="stage-seal" aria-hidden="true"></div><div class="stage-active"><h2 style="font-family:var(--font-display);margin:0 0 4px;">'+t+'</h2><p style="color:var(--ink-soft);margin:0 0 18px;font-size:0.92rem;">'+a+"</p>"+o+"</div>",document.querySelectorAll(".paper-btn").forEach(function(e){e.addEventListener("click",function(){document.querySelectorAll(".paper-btn").forEach(function(e){e.classList.remove("active")}),e.classList.add("active"),n=e.dataset.fmt})}),document.getElementById("submitBtn").addEventListener("click",e.dualUpload?g:m),document.getElementById("resetBtn").addEventListener("click",function(){var t=document.getElementById("dl4x6Btn"),a=document.getElementById("dlA4Btn");t&&t.removeAttribute("href"),a&&a.removeAttribute("href"),i(e),r("Previous card cleared. Upload a new file to generate another one.","success")})}function s(){var e=document.createElement("canvas");e.width=1200,e.height=1800;var t=e.getContext("2d");return t.fillStyle="#ffffff",t.fillRect(0,0,e.width,e.height),t.imageSmoothingEnabled=!0,t.imageSmoothingQuality="high",{canvas:e,ctx:t}}function l(){var e=document.createElement("canvas");e.width=3508,e.height=2480;var t=e.getContext("2d");return t.fillStyle="#ffffff",t.fillRect(0,0,e.width,e.height),t.imageSmoothingEnabled=!0,t.imageSmoothingQuality="high",{canvas:e,ctx:t}}function c(e,t,a,o){var n=e.width,r=e.height,d=Math.min(.9*a/n,.9*o/r),i=Math.floor(n*d),s=Math.floor(r*d),l=Math.floor((a-i)/2),c=Math.floor((o-s)/2);t.drawImage(e,0,0,n,r,l,c,i,s)}function h(e,t,a,o,n,r){var d=Math.min(n/e.width,r/e.height),i=e.width*d,s=e.height*d,l=a+(n-i)/2,c=o+(r-s)/2;t.drawImage(e,0,0,e.width,e.height,l,c,i,s),t.strokeStyle="#333",t.lineWidth=2,t.strokeRect(a,o,n,r)}function p(e,t,a,o,n){if(!t)return c(e,a,o,n);if(1200===o){var r=Math.floor(.86*o),d=Math.floor(.42*n),i=Math.floor(.04*n),s=2*d+i,l=Math.floor((o-r)/2),p=Math.floor((n-s)/2),u=p+d+i;h(e,a,l,p,r,d),h(t,a,l,u,r,d)}else{var f=Math.floor(.42*o),m=Math.floor(.8*n),g=Math.floor(.06*o),v=2*f+g,y=Math.floor((o-v)/2),w=y+f+g,b=Math.floor((n-m)/2);h(e,a,y,b,f,m),h(t,a,w,b,f,m)}}function u(e,t,a,o,n){return"aadhaar"===e?function(e,t,a,o){var n=e.width,r=e.height,d=Math.floor(.28*r),i=r-d,s=Math.floor(.5*n);if(1200===a){var l=1280,c=940,h=Math.floor((a-l)/2),p=Math.floor((o-1880)/3),u=p+c+p;t.drawImage(e,0,i,s,d,h-90,p,l,c),t.drawImage(e,s,i,n-s,d,h+90,u,l,c)}else{var f=Math.floor(.44*a),m=Math.floor(f*(d/(n/2))),g=Math.floor(.04*a),v=2*f+g,y=Math.floor((a-v)/2),w=y+f+g,b=Math.floor((o-m)/2);t.drawImage(e,0,i,s,d,y,b,f,m),t.drawImage(e,s,i,n-s,d,w,b,f,m)}}(t,a,o,n):"pan"===e?function(e,t,a,o){var n=e.width,r=e.height,d=1011,i=1035,s=638,l=r-Math.floor(.23*r),c=Math.floor((n-2022)/2);if(1200===a){var h=1100,p=Math.floor(678.0676328502416),u=h-Math.floor(37.19806763285024),f=Math.floor((a-h)/2),m=Math.floor((a-u)/2),g=150+p+120;t.drawImage(e,c,l,i,s,f,150,h,p),t.drawImage(e,c+d+35,l,1e3,s,m,g,u,p)}else{var v=Math.floor(.42*a),y=Math.floor(v*(s/i)),w=Math.floor(.06*a),b=2*v+w,P=Math.floor((a-b)/2),I=P+v+w,A=Math.floor((o-y)/2);t.drawImage(e,c,l,i,s,P,A,v,y),t.drawImage(e,c+d+35,l,1e3,s,I,A,Math.floor(v*(1e3/i)),y)}}(t,a,o,n):"voter"===e?function(e,t,a,o){var n=e.width/2480,r=e.height/3509,d=Math.floor(236*n),i=Math.floor(394*r),s=Math.floor(1040*r)-i,l=Math.floor(133*n),c=Math.floor(1158*n),h=c+d,p=c-l,u=Math.floor(2385*n)-h;if(1200===a){var f=1080,m=700,g=Math.floor((a-f)/2),v=Math.floor((o-1480)/2);t.drawImage(e,l,i,p,s,g,v,f,m),t.drawImage(e,h,i,u,s,g,v+m+80,f,m),t.strokeStyle="#000",t.lineWidth=2,t.strokeRect(g,v,f,m),t.strokeRect(g,v+m+80,f,m)}else{var y=Math.floor(.42*a),w=Math.floor(y*(s/p)),b=Math.floor(.06*a),P=2*y+b,I=Math.floor((a-P)/2),A=I+y+b,M=Math.floor((o-w)/2);t.drawImage(e,l,i,p,s,I,M,y,w),t.drawImage(e,h,i,u,s,A,M,y,w),t.strokeStyle="#333",t.lineWidth=3,t.strokeRect(I,M,y,w),t.strokeRect(A,M,y,w)}}(t,a,o,n):"ayushman"===e?function(e,t,a,o){var n=e.width,r=e.height,d=Math.min(.88*a/n,.85*o/r),i=Math.floor(n*d),s=Math.floor(r*d),l=Math.floor((a-i)/2),c=Math.floor((o-s)/2);t.drawImage(e,0,0,n,r,l,c,i,s)}(t,a,o,n):c(t,a,o,n)}function f(e,t){return"pdf"===e.name.split(".").pop().toLowerCase()?e.arrayBuffer().then(function(e){return pdfjsLib.getDocument({data:e,password:t||""}).promise}).then(function(e){return e.getPage(1)}).then(function(e){var t=e.getViewport({scale:4.2}),a=document.createElement("canvas");return a.width=t.width,a.height=t.height,e.render({canvasContext:a.getContext("2d"),viewport:t}).promise.then(function(){return a})}):new Promise(function(t,a){var o=new Image,n=URL.createObjectURL(e);o.onload=function(){var e=document.createElement("canvas");e.width=o.naturalWidth,e.height=o.naturalHeight,e.getContext("2d").drawImage(o,0,0),URL.revokeObjectURL(n),t(e)},o.onerror=a,o.src=n})}function m(){var e=o,t=document.getElementById("fileInput").files[0];if(t){var a=document.getElementById("submitBtn");a.disabled=!0,a.textContent="Processing...",r("Loading file...","loading"),d(10),document.getElementById("downloadSection").classList.remove("visible");var i=document.getElementById("pdfPassword"),c=i?i.value.trim():"";r("Rendering document at high quality...","loading"),d(30),f(t,c).then(function(t){d(55),r("Composing print layout...","loading");var o=null,i=null;if("4x6"===n||"both"===n){var c=s();u(e.renderKey,t,c.ctx,c.canvas.width,c.canvas.height),o=c.canvas.toDataURL("image/jpeg",.92)}if(d(75),"a4"===n||"both"===n){var h=l();u(e.renderKey,t,h.ctx,h.canvas.width,h.canvas.height),i=h.canvas.toDataURL("image/jpeg",.92)}d(95);var p=Date.now(),f=document.getElementById("downloadSection"),m=document.getElementById("dl4x6Btn"),g=document.getElementById("dlA4Btn");o?(m.href=o,m.download=e.id+"_4x6_"+p+".jpg",m.style.display="flex"):m.style.display="none",i?(g.href=i,g.download=e.id+"_A4_"+p+".jpg",g.style.display="flex"):g.style.display="none",f.classList.add("visible"),d(100),r("Done! Use the buttons below to download your print-ready file.","success"),a.disabled=!1,a.textContent="Crop & Generate Print"}).catch(function(e){console.error(e),e&&"PasswordException"===e.name?r("This PDF is password-protected. Please enter the correct password.","error"):r("Could not process this file: "+(e&&e.message?e.message:"please check the format and try again."),"error"),a.disabled=!1,a.textContent="Crop & Generate Print"})}else r("Please select a file first.","error")}function g(){var e=o,t=document.getElementById("fileInput").files[0],a=document.getElementById("backFileInput"),i=a?a.files[0]:null;if(t){var c=document.getElementById("submitBtn");c.disabled=!0,c.textContent="Processing...",r("Loading file(s)...","loading"),d(10),document.getElementById("downloadSection").classList.remove("visible");var h=document.getElementById("pdfPassword"),u=h?h.value.trim():"",m=[f(t,u)];i&&m.push(f(i,u)),Promise.all(m).then(function(t){var a=t[0],o=t[1]||null;d(55),r("Composing print layout...","loading");var i=null,h=null;if("4x6"===n||"both"===n){var u=s();p(a,o,u.ctx,u.canvas.width,u.canvas.height),i=u.canvas.toDataURL("image/jpeg",.92)}if(d(75),"a4"===n||"both"===n){var f=l();p(a,o,f.ctx,f.canvas.width,f.canvas.height),h=f.canvas.toDataURL("image/jpeg",.92)}d(95);var m=Date.now(),g=document.getElementById("downloadSection"),v=document.getElementById("dl4x6Btn"),y=document.getElementById("dlA4Btn");i?(v.href=i,v.download=e.id+"_4x6_"+m+".jpg",v.style.display="flex"):v.style.display="none",h?(y.href=h,y.download=e.id+"_A4_"+m+".jpg",y.style.display="flex"):y.style.display="none",g.classList.add("visible"),d(100),r(o?"Done! Front and back sides are ready to download.":"Done! (Only front side was provided.)","success"),c.disabled=!1,c.textContent="Crop & Generate Print"}).catch(function(e){console.error(e),e&&"PasswordException"===e.name?r("One of the files is password-protected. Please enter the correct password.","error"):r("Could not process these files: "+(e&&e.message?e.message:"please check the format and try again."),"error"),c.disabled=!1,c.textContent="Crop & Generate Print"})}else r("Please select the front side file first.","error")}document.querySelectorAll(".ribbon-item").forEach(function(e){e.addEventListener("click",function(){var t=e.getAttribute("data-url"),a=e.getAttribute("data-title")||"Tool";t&&function(e,t){var a=Math.round((window.screen.width-520)/2),o=Math.round((window.screen.height-680)/2);window.open(e,t||"toolPopup","width=520,height=680,left="+a+",top="+o+",resizable=yes,scrollbars=yes,status=no,toolbar=no,menubar=no,location=no")}(t,a)})})}();
+</script>
+<script>
+(function(){
+  var btn=document.querySelector('.menu-btn'),nav=document.getElementById('topnav');
+  if(!btn||!nav)return;
+  btn.addEventListener('click',function(){
+    var o=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',o);
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+  });
+})();
+</script>
+
+
+</body></html>
